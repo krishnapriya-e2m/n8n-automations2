@@ -1,0 +1,317 @@
+{
+  "name": "math-problem-1",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "N8N/Zapier costing comparision",
+        "formDescription": "Input the following details",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Scenario"
+            },
+            {
+              "fieldLabel": "Emails per day",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Tasks per email",
+              "fieldType": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "3c7847be-d1ee-42b4-b701-1a575566e9ec",
+      "name": "On form submission",
+      "webhookId": "fd2813d4-bacf-48a8-b97e-e158d030b6ce"
+    },
+    {
+      "parameters": {
+        "jsCode": "// User inputs\nconst scenario = $json.scenario;\nconst emailsPerDay = Number($json.emails_per_day);\nconst tasksPerEmail = Number($json.tasks_per_email);\n\n// Business assumptions (HARD-CODED)\nconst ZAPIER_COST_PER_TASK = 0.01; // hidden assumption\nconst N8N_COST_PER_MONTH = 50;\n\n// Calculations\nconst tasksPerDay = emailsPerDay * tasksPerEmail;\nconst tasksPerMonth = tasksPerDay * 30;\n\nconst zapierCost = tasksPerMonth * ZAPIER_COST_PER_TASK;\nconst savings = zapierCost - N8N_COST_PER_MONTH;\n\n// Output\nreturn [{\n  scenario,\n  emails_per_day: emailsPerDay,\n  tasks_per_email: tasksPerEmail,\n  tasks_per_day: tasksPerDay,\n  tasks_per_month: tasksPerMonth,\n  zapier_cost_month: zapierCost,\n  n8n_cost_month: N8N_COST_PER_MONTH,\n  savings_month: savings\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "469929c1-3468-4d09-8a3b-0ba25a6c05c6",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3cfdf599-c6bd-4239-b826-8f6dbcc7a071",
+              "name": "scenario",
+              "value": "={{ $json.Scenario }}",
+              "type": "string"
+            },
+            {
+              "id": "b65894d2-940d-44ae-ae22-aa655a61ccd0",
+              "name": "emails_per_day",
+              "value": "={{ $json['Emails per day'] }}",
+              "type": "number"
+            },
+            {
+              "id": "31b3af0c-4e11-4911-b2ef-a7ed3c33c072",
+              "name": "tasks_per_email",
+              "value": "={{ $json['Tasks per email'] }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "65b4a441-2e8a-4f5b-92cc-fb1c6fd8dd3f",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1E1rh0SMgCF87WPdd8qjbxRjIsWwyRgSDRkhNzUSzf5g",
+          "mode": "list",
+          "cachedResultName": "math-problem-1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1E1rh0SMgCF87WPdd8qjbxRjIsWwyRgSDRkhNzUSzf5g/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1E1rh0SMgCF87WPdd8qjbxRjIsWwyRgSDRkhNzUSzf5g/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Scenario": "={{ $json.scenario }}",
+            "Emails/day": "={{ $json.emails_per_day }}",
+            "Tasks/email": "={{ $json.tasks_per_email }}",
+            "Tasks/day": "={{ $json.tasks_per_day }}",
+            "Tasks/month": "={{ $json.tasks_per_month }}",
+            "Zapier cost/month": "={{ $json.zapier_cost_month }}",
+            "n8n cost/month": "={{ $json.n8n_cost_month }}",
+            "Savings/month": "={{ $json.savings_month }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Scenario",
+              "displayName": "Scenario",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Emails/day",
+              "displayName": "Emails/day",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Tasks/email",
+              "displayName": "Tasks/email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Tasks/day",
+              "displayName": "Tasks/day",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Tasks/month",
+              "displayName": "Tasks/month",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Zapier cost/month",
+              "displayName": "Zapier cost/month",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "n8n cost/month",
+              "displayName": "n8n cost/month",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Savings/month",
+              "displayName": "Savings/month",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        624,
+        0
+      ],
+      "id": "e4cda3e2-bb2e-4dae-922c-fc8e790312e1",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "G0lUxyeLFVTcjTco",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "Scenario": "High Volume",
+          "Emails per day": 1000,
+          "Tasks per email": 2,
+          "submittedAt": "2026-01-28T13:31:50.808+05:30",
+          "formMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Edit Fields": [
+      {
+        "json": {
+          "scenario": "High Volume",
+          "emails_per_day": 1000,
+          "tasks_per_email": 2
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Code in JavaScript": [
+      {
+        "json": {
+          "scenario": "High Volume",
+          "emails_per_day": 1000,
+          "tasks_per_email": 2,
+          "tasks_per_day": 2000,
+          "tasks_per_month": 60000,
+          "zapier_cost_month": 600,
+          "n8n_cost_month": 50,
+          "savings_month": 550
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Append row in sheet": [
+      {
+        "json": {
+          "Scenario": "High Volume",
+          "Emails/day": 1000,
+          "Tasks/email": 2,
+          "Tasks/day": 2000,
+          "Tasks/month": 60000,
+          "Zapier cost/month": 600,
+          "n8n cost/month": 50,
+          "Savings/month": 550
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "c4c92019-2ba2-4313-bcde-766bb5785f47",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6f281f755a06517910d8b98bc89e769284c7b37d4fd2c44dbce71d41ade5a160"
+  },
+  "id": "FcMNElMznntkB0M1reKh5",
+  "tags": []
+}

@@ -1,0 +1,224 @@
+{
+  "name": "n8n-local-test",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Introduce yourself",
+        "formDescription": "Provide your details below:",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name"
+            },
+            {
+              "fieldLabel": "Gender",
+              "fieldType": "checkbox",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Male"
+                  },
+                  {
+                    "option": "Female"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Age",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Position"
+            },
+            {
+              "fieldLabel": "Few words about yourself",
+              "fieldType": "textarea"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "17206511-cdfb-464a-8e71-b640f2b462e2",
+      "name": "On form submission",
+      "webhookId": "b2421530-9795-407a-834e-c9b6fe1413f3"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1kS_ZoB4Ye8ROn9ob9mpIsNsc1aAcQlibxR_JpnEUPEA",
+          "mode": "list",
+          "cachedResultName": "n8n-local-test1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kS_ZoB4Ye8ROn9ob9mpIsNsc1aAcQlibxR_JpnEUPEA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kS_ZoB4Ye8ROn9ob9mpIsNsc1aAcQlibxR_JpnEUPEA/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": 0,
+            "Name": "={{ $json.Name }}",
+            "Gender": "={{ $json.Gender }}",
+            "Age": "={{ $json.Age }}",
+            "Position": "={{ $json.Position }}",
+            "Few words about yourself": "={{ $json['Few words about yourself'] }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Gender",
+              "displayName": "Gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Position",
+              "displayName": "Position",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Few words about yourself",
+              "displayName": "Few words about yourself",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "9c29622d-0b29-4c28-83a5-7c8a8d677d5e",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "G0lUxyeLFVTcjTco",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Append row in sheet": [
+      {
+        "json": {
+          "row_number": 0,
+          "Name": "KP Nair",
+          "Gender": [
+            "Female"
+          ],
+          "Age": 22,
+          "Position": "AI Intern",
+          "Few words about yourself": "I am working as an AI Intern at E2M Solutions."
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "On form submission": [
+      {
+        "json": {
+          "Name": "KP Nair",
+          "Gender": [
+            "Female"
+          ],
+          "Age": 22,
+          "Position": "AI Intern",
+          "Few words about yourself": "I am working as an AI Intern at E2M Solutions.",
+          "submittedAt": "2026-01-28T12:44:43.540+05:30",
+          "formMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "c965e973-686b-45d3-825b-7c5bcda96bfe",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6f281f755a06517910d8b98bc89e769284c7b37d4fd2c44dbce71d41ade5a160"
+  },
+  "id": "GGPmPksvt9Fjnl_NxFLs0",
+  "tags": []
+}
